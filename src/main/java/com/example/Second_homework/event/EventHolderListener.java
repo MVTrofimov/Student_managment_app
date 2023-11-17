@@ -11,12 +11,19 @@ import java.util.logging.Logger;
 public class EventHolderListener {
 
     @EventListener
-    public void listen(EventHolder eventHolder){
+    public void listen(AddEventHolder eventHolder){
 
         Logger logger = Logger.getLogger(EventHolderListener.class.getName());
 
         logger.info(eventHolder.getEvent().getPayload());
+    }
 
+    @EventListener
+    public void listen(DeleteEventHolder eventHolder){
+
+        Logger logger = Logger.getLogger(EventHolderListener.class.getName());
+
+        logger.info(eventHolder.getEvent().getPayload());
     }
 
 }

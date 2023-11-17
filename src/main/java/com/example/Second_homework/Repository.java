@@ -1,7 +1,8 @@
 package com.example.Second_homework;
 
 
-import com.example.Second_homework.event.EventHolder;
+import com.example.Second_homework.event.AddEventHolder;
+import com.example.Second_homework.event.DeleteEventHolder;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -14,7 +15,6 @@ import java.util.UUID;
 public class Repository {
 
     private Map<UUID, Student> students = new HashMap<>();
-
 
     private ApplicationEventPublisher publisher;
 
@@ -30,7 +30,7 @@ public class Repository {
         Event event = new Event();
 
         event.setPayload("Создан студент " + firstName + " " + lastName + " id : " + id.toString());
-        publisher.publishEvent(new EventHolder(this, event));
+        publisher.publishEvent(new AddEventHolder(this, event));
     }
 
     @ShellMethod(value = "Delete student with input id")
@@ -38,7 +38,7 @@ public class Repository {
         students.remove(id);
         Event event = new Event();
         event.setPayload("Удален студент id : " + id.toString());
-        publisher.publishEvent(new EventHolder(this, event));
+        publisher.publishEvent(new DeleteEventHolder(this, event));
     }
 
     @ShellMethod(value = "Show all students", key = "show")
